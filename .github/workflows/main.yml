@@ -1,4 +1,4 @@
-name: Checkout code
+name: Main
 
 on:
   push:

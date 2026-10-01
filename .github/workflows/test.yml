@@ -2,7 +2,7 @@ name: Unit Test
 
 on:
   workflow_run:
-    workflows: ["Checkout code"]
+    workflows: ["Main"]
     types: [completed]
 
 jobs:
