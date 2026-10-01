@@ -1,4 +1,4 @@
-const utils = require('./utils').utils;
+const utils = require('./Utils').utils;
 
 const unit_test =async () => {
     //test case 1 of unit test
