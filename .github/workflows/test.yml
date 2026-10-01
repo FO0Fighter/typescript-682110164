@@ -1,0 +1,17 @@
+name: Unit Test
+
+on:
+  workflow_run:
+    workflows: ["Checkout code"]
+    types: [completed]
+
+jobs:
+  test:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get my code
+        uses: actions/checkout@v4
+
+      - name: Run test
+        run: npx tsx unit_test.ts
