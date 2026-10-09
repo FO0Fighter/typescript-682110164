@@ -10,6 +10,7 @@
     "test": "ts-node ./src/Test1.ts",
     "build": "tsc",
     "start": "node dist/index.js",
+    "multi": "ts-node ./src/multiServer.ts",
     "dev": "nodemon"
   },
   "dependencies": {
