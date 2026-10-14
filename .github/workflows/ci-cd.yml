@@ -1,0 +1,59 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install packages
+        run: npm install
+
+      - name: Run test
+        run: npx tsx src/Test1.ts
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install and build
+        run: |
+          npm install
+          npm run build --if-present
+
+      - name: Save the app
+        uses: actions/upload-artifact@v4
+        with:
+          name: app
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the app
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'TestAppofTest'
+          publish-profile: ${{ secrets.PASTE_SECRET_NAME_HERE }}
+          package: .
