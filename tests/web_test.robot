@@ -24,7 +24,7 @@ Add New Item To List
     Wait Until Element Is Visible    id:add-input    timeout=10s
     Input Text                       id:add-input    ${INPUT_ITEM}
     Click Button                     xpath://button[@type='submit']
-    Wait Until Page Contains Element xpath://ul[@id='list']/li    timeout=10s
+    Wait Until Page Contains Element    xpath://ul[@id='list']/li    timeout=10s
     Page Should Contain              ${INPUT_ITEM}
 
 *** Keywords ***
